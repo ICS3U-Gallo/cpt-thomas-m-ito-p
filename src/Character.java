@@ -1,24 +1,24 @@
+import processing.core.PApplet;
+
 //import java.util.*;
+import processing.core.*;
 class Character {
 
     private String name;
-    //private String job;
+    private String job;
     private int level;
     private int health;
     private int attack;
     private int defence;
-
-
-
     private int speed;
 
-    public Character(String name, int level, int health, int attack, int defence) {
+    public Character(String name, int level, int health, int attack, int defence, int speed) { //create a character with stats and name
         this.name = name;
         this.level = level;
         this.health = health;
         this.attack = attack;
         this.defence = defence;
-        //this.speed = speed;
+        this.speed = speed;
     }
 
     //Getters
