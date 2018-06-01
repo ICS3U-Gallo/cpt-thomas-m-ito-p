@@ -1,7 +1,5 @@
-import processing.core.PApplet;
-
 //import java.util.*;
-import processing.core.*;
+
 class Character {
 
     private String name;

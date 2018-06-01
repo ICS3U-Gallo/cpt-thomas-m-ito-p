@@ -5,13 +5,10 @@ public class Main extends PApplet {
 
     public static Scanner in = new Scanner(System.in);
     public static Random rng = new Random();//random number generator
-
     public static Character hero = new Character("Jim", 1, 20, 5, 3, 4);
 
-    int speed = 7;
-
+    int moveSpeed = 7;
     PVector sansLoc;
-
     PImage papyrus;
     PImage sans;
     PImage tree = new PImage();
@@ -22,9 +19,6 @@ public class Main extends PApplet {
 
     public static void main(String[] args) {
         PApplet.main(new String[] {"Main"});
-        //PApplet.Character(new String[] {"Character"});
-
-        //battleScreen("Monster");
     }
 
     public void settings() {
@@ -46,17 +40,20 @@ public class Main extends PApplet {
             mapScreen();
         }else if (screenState == 2){
             dialogueScreen();
+        }else if (screenState == 3) {
+            battleScreen("Tentacle Hentai Monster");
         }
     }
+
     public void keyPressed() {
         if (key == 'w' || key == 'W') {
-            sansLoc.y -= speed;
+            sansLoc.y -= moveSpeed;
         } else if (key == 's' || key == 'S') {
-            sansLoc.y += speed;
+            sansLoc.y += moveSpeed;
         } else if (key == 'a' || key == 'A') {
-            sansLoc.x -= speed;
+            sansLoc.x -= moveSpeed;
         } else if (key == 'd' || key == 'D') {
-            sansLoc.x += speed;
+            sansLoc.x += moveSpeed;
         }
     }
 
@@ -152,7 +149,7 @@ public class Main extends PApplet {
         text("press t to speak", 10, 30);
 
         textSize(height/20);
-        if (dialogueT == 0){
+        if (key == 't'|| key == 'T'){
             text("hello!", width/2 - 500, height/2);
             fill(0);
             rect(width/2, 0, width/2, height);
@@ -169,8 +166,8 @@ public class Main extends PApplet {
         image(sans, 0, height/2 + 40, height/3 - 50, height/3 -50);
     }
 
-    public static void battleScreen(String name){
-
+    public void battleScreen(String name){
+        background(0);
         Character monster = new Character(name, 1,  20, 5, 3, 2);
         int damageDealt;
         int actionValue;
@@ -178,24 +175,25 @@ public class Main extends PApplet {
         boolean inBattle = true;
         boolean wonBattle = false;
 
-        System.out.println("You Encountered: " + monster.getName());
+        //System.out.println("You Encountered: " + monster.getName());
 
         while (monster.getHealth() > 0 && inBattle) {
 
-            System.out.println("Your HP: " + hero.getHealth() + "\n1. Attack 2. Run");
+            //System.out.println("Your HP: " + hero.getHealth() + "\n1. Attack 2. Run");
+            text("Your HP: " + hero.getHealth() + "\n1. Attack 2. Run", 50, 50);
             actionValue = in.nextInt();
 
-            if (actionValue == 1) {
+            if (key == 1) {
                 //your attack
                 damageDealt = hero.getAttack() - monster.getDefence();
                 monster.setHealth(monster.getHealth() - damageDealt);
-                System.out.println("You dealt: " + damageDealt + " damage");
+                //System.out.println("You dealt: " + damageDealt + " damage");
                 //enemy attack
                 damageDealt = monster.getAttack() - hero.getDefence();
                 hero.setHealth(hero.getHealth() - damageDealt);
-                System.out.println(monster.getName() + " dealt: " + damageDealt + " damage");
-            } else if (actionValue == 2) {
-                System.out.println("Got away");
+                //System.out.println(monster.getName() + " dealt: " + damageDealt + " damage");
+            } else if (key == 2) {
+                //System.out.println("Got away");
                 inBattle = false;
             } else {
 
@@ -206,9 +204,10 @@ public class Main extends PApplet {
             hero.setLevel(hero.getLevel() + 1); //get a level
             levelUp(1, 3);//range of stats you can level
         }
+        screenState = 1;
     }
 
-    public static void levelUp(int min, int max) {
+    public void levelUp(int min, int max) {
         int statPoints = rng.nextInt((max - min) + 1) + min; // set range for how many stats can level up
         int leveledStat; //use numbers to id stats
 
