@@ -69,4 +69,3 @@ class Character {
         this.speed = speed;
     }
 }
-
