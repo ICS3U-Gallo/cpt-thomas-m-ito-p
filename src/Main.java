@@ -9,11 +9,9 @@ public class Main extends PApplet {
 
     int moveSpeed = 7;
     PVector sansLoc;
-    PImage papyrus;
+    PImage gavin;
     PImage sans;
     PImage tree = new PImage();
-
-    int dialogueT = 1;
 
     int screenState;
 
@@ -27,11 +25,9 @@ public class Main extends PApplet {
 
     public void setup() {
         background(0);
-        papyrus = loadImage("Assets/papyrus.png");
+        gavin = loadImage("Assets/gavin.png");
         sans = loadImage("Assets/sans.png");
-        tree = loadImage("Assets/tree.png");
-        //frameRate(30);
-        screenState = 1;//map
+        screenState = 3;//map
         sansLoc = new PVector(width - 300, height -200);
     }
 
@@ -41,7 +37,7 @@ public class Main extends PApplet {
         }else if (screenState == 2){
             dialogueScreen();
         }else if (screenState == 3) {
-            battleScreen("Tentacle Hentai Monster");
+            battleScreen("Gavin");
         }
     }
 
@@ -57,14 +53,12 @@ public class Main extends PApplet {
         }
     }
 
-    public void keyReleased() {
-        if (key == 't' || key == 'T') {
-            dialogueT = 0;
-        }
-    }
-
+   public void keyReleased() {
+       if (key == 't' || key == 'T') {
+       }
+   }
     void mapScreen(){
-        background(255, 241, 195);//#fff1c3
+        background(255, 241, 195); //#fff1c3 sand
 
         //path
 
@@ -81,7 +75,7 @@ public class Main extends PApplet {
 
         //characters
 
-        image(papyrus, width - 150, height/2, 100, 100);
+        image(gavin, width - 150, height/2, 100, 100);
 
         image(sans, sansLoc.x, sansLoc.y, 75, 75);
 
@@ -155,6 +149,7 @@ public class Main extends PApplet {
             rect(width/2, 0, width/2, height);
             fill(255);
             text("hey", width/2 + 175, height/2 - 100);
+            screenState = 3;
         }
         //int m = millis();
         //if(m <
@@ -162,12 +157,14 @@ public class Main extends PApplet {
         //rect(25, 25, 50, 50);
 
         //characters
-        image(papyrus, width - 250, height/2, height/3, height/3);
+        image(gavin, width - 250, height/2, height/3, height/3);
         image(sans, 0, height/2 + 40, height/3 - 50, height/3 -50);
     }
 
     public void battleScreen(String name){
         background(0);
+        fill(255);
+        ellipse(50, 50, 50, 50);
         Character monster = new Character(name, 1,  20, 5, 3, 2);
         int damageDealt;
         int actionValue;
@@ -181,18 +178,19 @@ public class Main extends PApplet {
 
             //System.out.println("Your HP: " + hero.getHealth() + "\n1. Attack 2. Run");
             text("Your HP: " + hero.getHealth() + "\n1. Attack 2. Run", 50, 50);
-            actionValue = in.nextInt();
+            //actionValue = in.nextInt();
 
-            if (key == 1) {
+            if (key == '1') {
                 //your attack
                 damageDealt = hero.getAttack() - monster.getDefence();
                 monster.setHealth(monster.getHealth() - damageDealt);
                 //System.out.println("You dealt: " + damageDealt + " damage");
+
                 //enemy attack
                 damageDealt = monster.getAttack() - hero.getDefence();
                 hero.setHealth(hero.getHealth() - damageDealt);
                 //System.out.println(monster.getName() + " dealt: " + damageDealt + " damage");
-            } else if (key == 2) {
+            } else if (key == '2') {
                 //System.out.println("Got away");
                 inBattle = false;
             } else {
@@ -207,7 +205,7 @@ public class Main extends PApplet {
         screenState = 1;
     }
 
-    public void levelUp(int min, int max) {
+        public void levelUp(int min, int max) {
         int statPoints = rng.nextInt((max - min) + 1) + min; // set range for how many stats can level up
         int leveledStat; //use numbers to id stats
 
@@ -224,7 +222,6 @@ public class Main extends PApplet {
                 hero.setDefence(hero.getDefence() + 1);
             }
         }
-        System.out.println("\nHP: " + hero.getHealth() + "\nAttack: " + hero.getAttack() + "\nDefense: " + hero.getDefence());
+            System.out.println("\nHP: " + hero.getHealth() + "\nAttack: " + hero.getAttack() + "\nDefense: " + hero.getDefence());
     }
-
 }
