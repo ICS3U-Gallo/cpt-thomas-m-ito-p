@@ -45,6 +45,11 @@ public class Main extends PApplet {
         }
     }
 
+    void createEnemies() {
+        enemies.add(new GameCharacter("Gavin", 1,  20, 20, 5, 3, 2));
+        enemies.add(new GameCharacter("Tree", 1, 15, 15, 2, 1, 0));
+    }
+
     public void keyPressed() {
         if (key == 'w' || key == 'W') {
             sansLoc.y -= moveSpeed;
@@ -57,13 +62,9 @@ public class Main extends PApplet {
         }
     }
 
-    /*public void keyReleased() {
-       if (key == 't' || key == 'T') {
-       }
-   }*/
     void mapScreen(){
         background(255, 241, 195); //#fff1c3 sand
-
+        textAlign(LEFT);
         //path
 
         stroke(232, 185, 39);//#e8b927
@@ -90,7 +91,7 @@ public class Main extends PApplet {
 
         //trees
 
-        int numTrees = 18;
+        int numTrees = 35;
 
         for (int i = 0; i < numTrees; i++){
             float x = 225 + 50 * i;
@@ -98,7 +99,7 @@ public class Main extends PApplet {
             image(tree, x, y, 400, 400);
         }
 
-//text box and boundaries
+        //text box and boundaries
 
         if (sansLoc.x >= width - 225) {
             sansLoc.x = width - 225;
@@ -165,11 +166,6 @@ public class Main extends PApplet {
         image(sans, 0, height/2 + 40, height/3 - 50, height/3 -50);
     }
 
-    void createEnemies() {
-        enemies.add(new GameCharacter("Gavin", 1,  20, 20, 5, 3, 2));
-        enemies.add(new GameCharacter("Baddie", 1, 20, 20, 2, 1, 4));
-}
-
     public void battleScreen(int id) {
         background(0);
         fill(255);
@@ -178,19 +174,21 @@ public class Main extends PApplet {
 
         //text("You Encountered: " + enemies.get(id).getName(), width/2, height/2);
 
-        if(enemies.get(id).getMaxHP() > 0) {
+
+
+        if(enemies.get(id).getCurrentHP() > 0) {
             textAlign(LEFT);
-            text("Your HP: " + enemies.get(id).getMaxHP() + "\n1. Attack 2. Run", 50, 50);
-            text("their HP: ", + enemies.get(id).getMaxHP(), width - 50, 50);
+            text("Your HP: " + enemies.get(id).getCurrentHP() + "\n1. Attack 2. Run", 50, 50);
+            textAlign(RIGHT);
+            text("Their HP: " + enemies.get(id).getCurrentHP(), width - 50, 50);
             if (keyPressed && key == '1') {
                 //your attack
                 damageDealt = hero.getAttack() - enemies.get(id).getDefence();
-                enemies.get(id).setCurrentHP(enemies.get(id).getMaxHP() - damageDealt);
+                enemies.get(id).setCurrentHP(enemies.get(id).getCurrentHP() - damageDealt);
                 //enemy attack
                 damageDealt = enemies.get(id).getAttack() - hero.getDefence();
-                hero.setCurrentHP(hero.getMaxHP() - damageDealt);
+                hero.setCurrentHP(hero.getCurrentHP() - damageDealt);
             } else if (keyPressed && key == '2') {
-                System.out.println("Got away");
                 screenState = 1;
             } else {
 
@@ -199,7 +197,7 @@ public class Main extends PApplet {
 
         if (enemies.get(id).getCurrentHP() == 0) { //if you win the battle
             hero.setLevel(hero.getLevel() + 1); //get a level
-            levelUp(1, 3);//range of stats you can level
+            //levelUp(1, 3);//range of stats you can level
             screenState = 1;
         }
 

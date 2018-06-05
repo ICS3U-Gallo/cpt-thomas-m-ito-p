@@ -59,9 +59,9 @@ class GameCharacter {
         this.level = level;
     }
 
-    /*public void setMaxHP(int maxHealth){
-        this.maxHealth = maxHealth;
-    }*/
+    public void setMaxHP(int maxHealth){
+        this.maxHP = maxHealth;
+    }
 
     public void setCurrentHP(int currentHP) {
         this.currentHP = currentHP;
