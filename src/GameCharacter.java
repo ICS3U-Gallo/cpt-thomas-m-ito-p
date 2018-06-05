@@ -1,19 +1,21 @@
 //import java.util.*;
 
-class Character {
+class GameCharacter {
 
     private String name;
     private String job;
     private int level;
-    private int health;
+    private int maxHP;
+    private int currentHP;
     private int attack;
     private int defence;
     private int speed;
 
-    public Character(String name, int level, int health, int attack, int defence, int speed) { //create a character with stats and name
+    public GameCharacter(String name, int level, int maxHP, int currentHP, int attack, int defence, int speed) { //create a character with stats and name
         this.name = name;
         this.level = level;
-        this.health = health;
+        this.maxHP = maxHP;
+        this.currentHP = currentHP;
         this.attack = attack;
         this.defence = defence;
         this.speed = speed;
@@ -28,8 +30,12 @@ class Character {
         return level;
     }
 
-    public int getHealth() {
-        return health;
+    public int getMaxHP() {
+        return maxHP;
+    }
+
+    public int getCurrentHP() {
+        return currentHP;
     }
 
     public int getAttack(){
@@ -53,15 +59,19 @@ class Character {
         this.level = level;
     }
 
-    public void setHealth(int health){
-        this.health = health;
+    /*public void setMaxHP(int maxHealth){
+        this.maxHealth = maxHealth;
+    }*/
+
+    public void setCurrentHP(int currentHP) {
+        this.currentHP = currentHP;
     }
 
-    public void setAttack(int attack){
+    public void setAttack(int attack) {
         this.attack = attack;
     }
 
-    public void setDefence(int defence){
+    public void setDefence(int defence) {
         this.defence = defence;
     }
 

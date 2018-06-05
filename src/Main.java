@@ -5,8 +5,8 @@ public class Main extends PApplet {
 
     public static Scanner in = new Scanner(System.in);
     public static Random rng = new Random();//random number generator
-    public static Character hero = new Character("Jim", 1, 20, 5, 3, 4);
-    public static Character monster;
+    public static GameCharacter hero = new GameCharacter("Jim", 1, 20, 20, 5, 3, 4);
+    ArrayList<GameCharacter> enemies  = new ArrayList<GameCharacter>();
 
     int moveSpeed = 7;
     PVector sansLoc;
@@ -31,6 +31,7 @@ public class Main extends PApplet {
         tree = loadImage("Assets/tree.png");
         screenState = 3;//map
         sansLoc = new PVector(width - 300, height -200);
+        createEnemies();
     }
 
     public void draw() {
@@ -39,8 +40,8 @@ public class Main extends PApplet {
         }else if (screenState == 2){
             dialogueScreen();
         }else if (screenState == 3) {
-            createMonster("Gavin");
-            battleScreen();
+            createEnemies();
+            battleScreen(0);
         }
     }
 
@@ -141,7 +142,7 @@ public class Main extends PApplet {
         //dialogue
 
         fill(255);
-
+        textAlign(LEFT);
         textSize(height/30);
         text("press t to speak", 10, 30);
 
@@ -163,46 +164,40 @@ public class Main extends PApplet {
         image(gavin, width - 250, height/2, height/3, height/3);
         image(sans, 0, height/2 + 40, height/3 - 50, height/3 -50);
     }
-    void createMonster(String name) {
-        monster = new Character(name, 1,  20, 5, 3, 2);
-    }
 
-    public void battleScreen(){
+    void createEnemies() {
+        enemies.add(new GameCharacter("Gavin", 1,  20, 20, 5, 3, 2));
+        enemies.add(new GameCharacter("Baddie", 1, 20, 20, 2, 1, 4));
+}
+
+    public void battleScreen(int id) {
         background(0);
         fill(255);
         int damageDealt;
         int actionValue;
 
-        boolean inBattle = true;
+        //text("You Encountered: " + enemies.get(id).getName(), width/2, height/2);
 
-
-        //text("You Encountered: " + monster.getName(), width/2, height/2);
-
-        if (monster.getHealth() > 0) {
-            textAlign(CENTER);
-            text("Your HP: " + hero.getHealth() + "\n1. Attack 2. Run", 50, 50);
-            text("Monster's HP: ", + monster.getHealth(), width -50, height - 50);
-            //actionValue = in.nextInt();
+        if(enemies.get(id).getMaxHP() > 0) {
+            textAlign(LEFT);
+            text("Your HP: " + enemies.get(id).getMaxHP() + "\n1. Attack 2. Run", 50, 50);
+            text("their HP: ", + enemies.get(id).getMaxHP(), width - 50, 50);
             if (keyPressed && key == '1') {
                 //your attack
-                damageDealt = hero.getAttack() - monster.getDefence();
-                monster.setHealth(monster.getHealth() - damageDealt);
-                //System.out.println("You dealt: " + damageDealt + " damage");
-
+                damageDealt = hero.getAttack() - enemies.get(id).getDefence();
+                enemies.get(id).setCurrentHP(enemies.get(id).getMaxHP() - damageDealt);
                 //enemy attack
-                damageDealt = monster.getAttack() - hero.getDefence();
-                hero.setHealth(hero.getHealth() - damageDealt);
-                //System.out.println(monster.getName() + " dealt: " + damageDealt + " damage");
+                damageDealt = enemies.get(id).getAttack() - hero.getDefence();
+                hero.setCurrentHP(hero.getMaxHP() - damageDealt);
             } else if (keyPressed && key == '2') {
                 System.out.println("Got away");
-                inBattle = false;
                 screenState = 1;
             } else {
 
             }
         }
 
-        if (monster.getHealth() == 0) { //if you win the battle
+        if (enemies.get(id).getCurrentHP() == 0) { //if you win the battle
             hero.setLevel(hero.getLevel() + 1); //get a level
             levelUp(1, 3);//range of stats you can level
             screenState = 1;
@@ -220,13 +215,13 @@ public class Main extends PApplet {
             statPoints -= 1;
 
             if (leveledStat == 1) {
-                hero.setHealth(hero.getHealth() + 1);
+                hero.setMaxHP(hero.getMaxHP() + 1);
             } else if (leveledStat == 2) {
                 hero.setAttack(hero.getAttack() + 1);
             } else if (leveledStat == 3) {
                 hero.setDefence(hero.getDefence() + 1);
             }
         }
-            System.out.println("\nHP: " + hero.getHealth() + "\nAttack: " + hero.getAttack() + "\nDefense: " + hero.getDefence());
+            System.out.println("\nHP: " + hero.getMaxHP() + "\nAttack: " + hero.getAttack() + "\nDefense: " + hero.getDefence());
     }
 }
