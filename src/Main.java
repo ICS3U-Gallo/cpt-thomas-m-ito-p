@@ -145,6 +145,16 @@ public class Main extends PApplet {
         image(grove, 50, -10);
 
         //text box and boundaries
+        
+        fill(0);
+        rect(5, 5, 375, 195, 15);
+        fill(255);
+        textSize(25);
+        text("Welcome to the town of harb!", 10, 35);
+        text("Introduce yourself to the", 10, 65);
+        text("mayor, Gavin.", 10, 95);
+        text("Beware of hidden enemies", 10, 125);
+        text("on the way", 10, 155);
 
         if (sansLoc.x >= width - 225) {
             sansLoc.x = width - 225;
