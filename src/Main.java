@@ -113,7 +113,85 @@ public class Main extends PApplet {
             }
         }
     }
-
+void menuScreen() {
+  background(111, 227, 0);
+  noStroke();
+  fill(255, 241, 195);
+  rect(width/2 - 475, height/2 - 100, width/2 + 250, height, 50);
+  
+  int numTreesV1 = 3;
+   
+  for (int i = 0; i < numTreesV1; i++){
+    float x = -110;
+    float y = -135 + 340 * i;
+    image(tree, x, y, 400, 400);   
+  }
+  
+  int numTreesH = 7;
+   
+  for (int i = 0; i < numTreesH; i++){
+    float x = -110 + 200 * i;
+    float y = -135;
+    image(tree, x, y, 400, 400);   
+  }
+  
+   int numTreesV2 = 3;
+   
+  for (int i = 0; i < numTreesV2; i++){
+    float x = 1090;
+    float y = -135 + 340 * i;
+    image(tree, x, y, 400, 400);   
+  }
+  
+  fill(0);
+  textSize(45);
+  textAlign(CENTER);
+  text("Gavin And Lincoln's Tree Adventure", width/2, height/2 + 25);
+  textSize(30);
+  text("press [SPACE] to start", width/2, height/2 + 150);
+  if(key == ' '){
+    screenState = 1;
+  }
+    void menuScreen() {
+  background(111, 227, 0);
+  noStroke();
+  fill(255, 241, 195);
+  rect(width/2 - 475, height/2 - 100, width/2 + 250, height, 50);
+  
+  int numTreesV1 = 3;
+   
+  for (int i = 0; i < numTreesV1; i++){
+    float x = -110;
+    float y = -135 + 340 * i;
+    image(tree, x, y, 400, 400);   
+  }
+  
+  int numTreesH = 7;
+   
+  for (int i = 0; i < numTreesH; i++){
+    float x = -110 + 200 * i;
+    float y = -135;
+    image(tree, x, y, 400, 400);   
+  }
+  
+   int numTreesV2 = 3;
+   
+  for (int i = 0; i < numTreesV2; i++){
+    float x = 1090;
+    float y = -135 + 340 * i;
+    image(tree, x, y, 400, 400);   
+  }
+  
+  fill(0);
+  textSize(45);
+  textAlign(CENTER);
+  text("Gavin And Lincoln's Tree Adventure", width/2, height/2 + 25);
+  textSize(30);
+  text("press [SPACE] to start", width/2, height/2 + 150);
+  if(key == ' '){
+    screenState = 1;
+  }
+    
     void mapScreen(){
         background(255, 241, 195); //#fff1c3 sand
         textAlign(LEFT);
