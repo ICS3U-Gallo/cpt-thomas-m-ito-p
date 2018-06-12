@@ -33,7 +33,7 @@ public class Main extends PApplet {
         sans = loadImage("Assets/sans.png");
         tree = loadImage("Assets/tree.png");
         screenState = 1;//map
-        sansLoc = new PVector(width - 300, height -200);
+        sansLoc = new PVector(width - 300, height - 200);
         createEnemies();
 
     }
@@ -51,14 +51,15 @@ public class Main extends PApplet {
 
     void createEnemies() {
         enemies.add(new GameCharacter("Gavin", 1,  20, 20, 5, 3, 2));
-        enemies.add(new GameCharacter("Tree", 1, 15, 15, 2, 1, 0));
+        enemies.add(new GameCharacter("Tree", 1, 15, 15, 4, 1, 0));
 
         //enemyPics.add(loadImage("Assets/gavin.png"));
         //enemyPics.add(loadImage("Assets/tree.png"));
     }
 
-    void resetEnemies(int id) {
+    void resetCharacters(int id) {
         enemies.get(id).setCurrentHP(enemies.get(id).getMaxHP());
+        hero.setCurrentHP(hero.getMaxHP());
     }
 
     public boolean wasdPressed(){
@@ -220,17 +221,17 @@ public class Main extends PApplet {
                 damageDealt = enemies.get(id).getAttack() - hero.getDefence();
                 hero.setCurrentHP(hero.getCurrentHP() - damageDealt);
             } else if (keyPressed && key == '2') {
-                resetEnemies(id);
+                resetCharacters(id);
                 screenState = 1;
             } else {
 
             }
         }
 
-        if (enemies.get(id).getCurrentHP() == 0) { //if you win the battle
+        if (enemies.get(id).getCurrentHP() <= 0) { //if you win the battle
             hero.setLevel(hero.getLevel() + 1); //get a level
             //levelUp(1, 3);//range of stats you can level
-            resetEnemies(id);
+            resetCharacters(id);
             screenState = 1;
         }
     }
