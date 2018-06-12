@@ -18,6 +18,7 @@ public class Main extends PApplet {
     PImage tree;
 
     int screenState;
+    PGraphics grove;
 
     public static void main(String[] args) {
         PApplet.main(new String[] {"Main"});
@@ -36,6 +37,18 @@ public class Main extends PApplet {
         sansLoc = new PVector(width - 300, height - 200);
         createEnemies();
 
+        grove = createGraphics(width, 700);
+        grove.beginDraw();
+        //trees
+
+        int numTrees = 35;
+
+        for (int i = 0; i < numTrees; i++){
+            float x = 225 + 50 * i;
+            float y = -135;
+            grove.image(tree, x, y, 400, 400);
+        }
+        grove.endDraw();
     }
 
     public void draw() {
@@ -62,18 +75,25 @@ public class Main extends PApplet {
         hero.setCurrentHP(hero.getMaxHP());
     }
 
-    public boolean wasdPressed(){
+    boolean wasdPressed(){
         if(screenState == 1 && keyPressed) {
             if (key == 'w' || key == 'W'
                     || key == 's' || key == 'S'
                     || key == 'a' || key == 'A'
                     || key == 'd' || key == 'D') {
                 return true;
-            } else {
-                return false;
             }
         }
         return false;
+    }
+
+    int encounterValue(){
+        //use two random nubers and find the average to reduce encounter chance
+        int firstNum = rng.nextInt(100 - 0) + 1;
+        int secondNum = rng.nextInt(100 - 0) + 1;
+
+        return (firstNum + secondNum) / 2;
+
     }
 
     public void keyPressed() {
@@ -87,7 +107,7 @@ public class Main extends PApplet {
             } else if (key == 'd' || key == 'D') {
                 sansLoc.x += moveSpeed;
             }
-            if((rng.nextInt(100 - 0) + 1) <= 10) {
+            if(encounterValue() <= 10) {
                 enemyId = rng.nextInt(enemies.size() - 1) + 1;
                 screenState = 3;
             }
@@ -122,14 +142,7 @@ public class Main extends PApplet {
         rect(0, height - 100, width, 100);
 
         //trees
-
-        int numTrees = 35;
-
-        for (int i = 0; i < numTrees; i++){
-            float x = 225 + 50 * i;
-            float y = -135;
-            image(tree, x, y, 400, 400);
-        }
+        image(grove, 50, -10);
 
         //text box and boundaries
 
@@ -199,7 +212,7 @@ public class Main extends PApplet {
         image(sans, 0, height/2 + 40, height/3 - 50, height/3 -50);
     }
 
-    public void battleScreen(int id) {
+    void battleScreen(int id) {
         background(0);
         fill(255);
         int damageDealt;
@@ -236,7 +249,7 @@ public class Main extends PApplet {
         }
     }
 
-    public void levelUp(int min, int max) {
+    void levelUp(int min, int max) {
         int statPoints = rng.nextInt((max - min) + 1) + min; // set range for how many stats can level up
         int leveledStat; //use numbers to id stats
 
