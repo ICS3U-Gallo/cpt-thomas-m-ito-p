@@ -17,6 +17,8 @@ public class Main extends PApplet {
     PImage sans;
     PImage tree;
 
+
+
     int screenState;
     PGraphics grove;
 
@@ -52,6 +54,7 @@ public class Main extends PApplet {
     }
 
     public void draw() {
+
         if (screenState == 0){
             menuScreen();
         }else if (screenState == 1){
@@ -68,8 +71,8 @@ public class Main extends PApplet {
         enemies.add(new GameCharacter("Gavin", 1,  20, 20, 5, 3, 2));
         enemies.add(new GameCharacter("Tree", 1, 15, 15, 4, 1, 0));
 
-        //enemyPics.add(loadImage("Assets/gavin.png"));
-        //enemyPics.add(loadImage("Assets/tree.png"));
+        enemyPics.add(loadImage("Assets/gavin.png"));
+        enemyPics.add(loadImage("Assets/tree.png"));
     }
 
     void resetCharacters(int id) {
@@ -116,13 +119,13 @@ public class Main extends PApplet {
         }
     }
 
-  void menuScreen() {
+    void menuScreen() {
         background(111, 227, 0);
         noStroke();
         fill(255, 241, 195);
-        rect(width / 2 - 475, height / 2 - 100, width / 2 + 250, height, 50);
+        rect(100, 200, width - 200 , height, 50);
 
-        int numTreesV1 = 3;
+        int numTreesV1 = 25;
 
         for (int i = 0; i < numTreesV1; i++) {
             float x = -110;
@@ -130,7 +133,7 @@ public class Main extends PApplet {
             image(tree, x, y, 400, 400);
         }
 
-        int numTreesH = 7;
+        int numTreesH = 25;
 
         for (int i = 0; i < numTreesH; i++) {
             float x = -110 + 200 * i;
@@ -138,10 +141,10 @@ public class Main extends PApplet {
             image(tree, x, y, 400, 400);
         }
 
-        int numTreesV2 = 3;
+        int numTreesV2 = 25;
 
         for (int i = 0; i < numTreesV2; i++) {
-            float x = 1090;
+            float x = width - 230;
             float y = -135 + 340 * i;
             image(tree, x, y, 400, 400);
         }
@@ -238,6 +241,8 @@ public class Main extends PApplet {
     void dialogueScreen(){
         background(0);
 
+       //image(enemyPics.get(id), width/2, height/2);
+
         //dialogue
 
         fill(255);
@@ -272,6 +277,8 @@ public class Main extends PApplet {
         int actionValue;
 
         //text("You Encountered: " + enemies.get(id).getName(), width/2, height/2);
+
+
 
         if(enemies.get(id).getCurrentHP() > 0) {
             textSize(25);
