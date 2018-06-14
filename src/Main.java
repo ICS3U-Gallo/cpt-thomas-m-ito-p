@@ -118,7 +118,7 @@ public class Main extends PApplet {
                 sansLoc.x += moveSpeed;
             }
             if (encounterValue() <= 10) {
-                enemyId = (int) random(0, enemies.size());
+                enemyId = (int) random(1, enemies.size());
                 screenState = 3;
             }
         }
@@ -246,65 +246,65 @@ public class Main extends PApplet {
         }
     }
 
-    void dialogueScreen(){
-  background(0); 
-  textAlign(LEFT);
-  //dialogue
-  
-    fill(255);
-    
-    textSize(height/30);
-    text("click to progress dialogue", 10, 30);
-    textSize(25);
-    
-    
-    //Lincoln text
-    if(textVar1 == 1){
-      text("Hello!", width/2 - 500, height/2); 
-      }else if(textVar1 == 3){
-        text("My name is Lincoln.", width/2 - 500, height/2); 
-      }else if(textVar1 == 5){
-        text("Well, you see, I'm currently", width/2 - 500, height/2); 
-        text("on an adventure to find the", width/2 - 500, height/2 + 50); 
-        text("magical red oak tree of the Harb tribe,", width/2 - 500, height/2 + 100);
-      }else if(textVar1 == 6){
-        text("...and I believe I have found the place...", width/2 - 500, height/2);
-      }else if(textVar1 == 7){
-        text("...so hand over the tree right now and ", width/2 - 500, height/2);
-        text("no one gets hurt!", width/2 - 500, height/2 + 50);
-      }else if(textVar1 == 10){
-        text("Okay, I'll fight you then!", width/2 - 500, height/2);
-      }
-      
-      //Gavin text
-    if(textVar2 == 0){
-    text("Hey!", width/2 + 175, height/2 - 100);
-    }else if(textVar2 == 2) {
-     text("Welcome to the town of", width/2 + 175, height/2 - 100);
-     text("Harb! My name is Gavin.", width/2 + 175, height/2 - 50);
-    }else if(textVar2 == 4) {
-     text("What brings you here Lincoln?", width/2 + 175, height/2 - 100);
-     text("We don't get too many visitors", width/2 + 175, height/2 - 50);
-     text("around these parts.", width/2 + 175, height/2);
-    }else if(textVar2 == 8) {
-     text("NO! THIS TREE HAS BEEN IN MY FAMILY", width/2 + 175, height/2 - 100);
-     text("FOR YEARS!", width/2 + 175, height/2 - 50);
-    }else if(textVar2 == 9) {
-     text("YOU WILL HAVE TO GET THROUGH ME", width/2 + 175, height/2 - 100);
-     text("FIRST!", width/2 + 175, height/2 - 50);
-    }
-  
+    void dialogueScreen() {
+        background(0);
+        textAlign(LEFT);
+        //dialogue
+
+        fill(255);
+
+        textSize(height / 30);
+        text("click to progress dialogue", 10, 30);
+        textSize(25);
+
+
+        //Lincoln text
+        if (textVar1 == 1) {
+            text("Hello!", width / 2 - 500, height / 2);
+        } else if (textVar1 == 3) {
+            text("My name is Lincoln.", width / 2 - 500, height / 2);
+        } else if (textVar1 == 5) {
+            text("Well, you see, I'm currently", width / 2 - 500, height / 2);
+            text("on an adventure to find the", width / 2 - 500, height / 2 + 50);
+            text("magical red oak tree of the Harb tribe,", width / 2 - 500, height / 2 + 100);
+        } else if (textVar1 == 6) {
+            text("...and I believe I have found the place...", width / 2 - 500, height / 2);
+        } else if (textVar1 == 7) {
+            text("...so hand over the tree right now and ", width / 2 - 500, height / 2);
+            text("no one gets hurt!", width / 2 - 500, height / 2 + 50);
+        } else if (textVar1 == 10) {
+            text("Okay, I'll fight you then!", width / 2 - 500, height / 2);
+        }
+
+        //Gavin text
+        if (textVar2 == 0) {
+            text("Hey!", width / 2 + 175, height / 2 - 100);
+        } else if (textVar2 == 2) {
+            text("Welcome to the town of", width / 2 + 175, height / 2 - 100);
+            text("Harb! My name is Gavin.", width / 2 + 175, height / 2 - 50);
+        } else if (textVar2 == 4) {
+            text("What brings you here Lincoln?", width / 2 + 175, height / 2 - 100);
+            text("We don't get too many visitors", width / 2 + 175, height / 2 - 50);
+            text("around these parts.", width / 2 + 175, height / 2);
+        } else if (textVar2 == 8) {
+            text("NO! THIS TREE HAS BEEN IN MY FAMILY", width / 2 + 175, height / 2 - 100);
+            text("FOR YEARS!", width / 2 + 175, height / 2 - 50);
+        } else if (textVar2 == 9) {
+            text("YOU WILL HAVE TO GET THROUGH ME", width / 2 + 175, height / 2 - 100);
+            text("FIRST!", width / 2 + 175, height / 2 - 50);
+        }
+
         //goes to fight screen
-      if(textVar1 == 11){
-        textAlign(CENTER);
-        textSize(height/10);
-        text("Press [f] to begin fight.", width/2, height/2);
-        if(key == 'f'){
-        screenState = 3;
-      }
-      }
-        
-  
+        if (textVar1 == 11) {
+            textAlign(CENTER);
+            textSize(height / 10);
+            text("Press [f] to begin fight.", width / 2, height / 2);
+            if (key == 'f') {
+                enemyId = 0;
+                screenState = 3;
+            }
+        }
+    }
 
     void battleScreen(int id) {
         background(0);
