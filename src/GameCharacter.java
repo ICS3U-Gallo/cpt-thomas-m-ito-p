@@ -3,16 +3,16 @@
 class GameCharacter {
 
     private String name;
-    private int level;
+    private int killCount;
     private int maxHP;
     private int currentHP;
     private int attack;
     private int defence;
     private int speed;
 
-    public GameCharacter(String name, int level, int maxHP, int currentHP, int attack, int defence, int speed) { //create a character with stats and name
+    public GameCharacter(String name, int killCount, int maxHP, int currentHP, int attack, int defence, int speed) { //create a character with stats and name
         this.name = name;
-        this.level = level;
+        this.killCount = killCount;
         this.maxHP = maxHP;
         this.currentHP = currentHP;
         this.attack = attack;
@@ -25,8 +25,8 @@ class GameCharacter {
        return name;
     }
 
-    public int getLevel() {
-        return level;
+    public int getKillCount() {
+        return killCount;
     }
 
     public int getMaxHP() {
@@ -54,8 +54,8 @@ class GameCharacter {
         this.name = name;
     }
 
-    public void setLevel(int level){
-        this.level = level;
+    public void setKillCount(int killCount){
+        this.killCount = killCount;
     }
 
     public void setMaxHP(int maxHealth){
