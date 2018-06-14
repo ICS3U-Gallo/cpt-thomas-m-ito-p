@@ -19,6 +19,8 @@ public class Main extends PApplet {
     int screenState;
     PGraphics grove;
 
+    int potionCount;
+
     public static void main(String[] args) {
         PApplet.main(new String[]{"Main"});
     }
@@ -32,8 +34,9 @@ public class Main extends PApplet {
         gavin = loadImage("Assets/gavin.png");
         sans = loadImage("Assets/sans.png");
         tree = loadImage("Assets/tree.png");
-        screenState = 0;//map
+        screenState = 0;//title screen
         sansLoc = new PVector(width - 300, height - 200);
+        potionCount = 3;
         createEnemies();
 
         grove = createGraphics(width, 700);
@@ -118,6 +121,7 @@ public class Main extends PApplet {
             }
         }
     }
+
 
     void menuScreen() {
         background(111, 227, 0);
@@ -243,10 +247,6 @@ public class Main extends PApplet {
     void dialogueScreen() {
         background(0);
 
-        //image(enemyPics.get(id), width/2, height/2);
-
-        //dialogue
-
         fill(255);
         textAlign(LEFT);
         textSize(height / 30);
@@ -276,10 +276,18 @@ public class Main extends PApplet {
         imageMode(CENTER);//draw images from center
         image(enemyPics.get(id), width / 2, height / 2, 400, 400);
 
+        textAlign(CENTER);
+        text("1. Attack 2. Use Potion 3. Run", width/2, height - 50);
+
+        if(hero.getCurrentHP() > hero.getMaxHP()) {
+            hero.setCurrentHP(hero.getMaxHP());
+        }
+
+        noLoop();
         if (enemies.get(id).getCurrentHP() > 0) {
             textSize(25);
             textAlign(LEFT);
-            text("Your HP: " + hero.getCurrentHP() + "\n1. Attack 2. Run", 50, 50);
+            text("Your HP: " + hero.getCurrentHP() + "\nPotions Remaining: " + potionCount, 50, 50);
             textAlign(RIGHT);
             text(enemies.get(id).getName() + "'s HP: " + enemies.get(id).getCurrentHP(), width - 50, 50);
             if (key == '1') {
@@ -295,11 +303,17 @@ public class Main extends PApplet {
                     damageDealt = 0;
                 }
                 hero.setCurrentHP(hero.getCurrentHP() - damageDealt);
-            } else if (key == '2') {
+            }else if(key =='2'&& potionCount > 0) {
+                potionCount -= 1;
+                hero.setCurrentHP(hero.getCurrentHP() + 5);
+            } else if (key == '3') {
                 resetCharacters(id);
                 screenState = 1;
-            } else {
-
+                //enemy attack
+                damageDealt = enemies.get(id).getAttack() - hero.getDefence();
+                if (damageDealt < 0) {
+                    damageDealt = 0;
+                }
             }
         }
 
@@ -308,5 +322,9 @@ public class Main extends PApplet {
             resetCharacters(id);
             screenState = 1;
         }
+    }
+    public void keyReleased() {
+        //if (screenState == 3)
+        loop();//loop after releasing a key - for battle
     }
 }
