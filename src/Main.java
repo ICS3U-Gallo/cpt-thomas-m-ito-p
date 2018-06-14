@@ -304,7 +304,17 @@ public class Main extends PApplet {
                 screenState = 3;
             }
         }
+        //characters
+  image(papyrus, width - 250, height/2, height/3, height/3); 
+  image(sans, 0, height/2 + 40, height/3 - 50, height/3 -50);
+}
     }
+
+ void mousePressed() {
+  textVar1++;
+  textVar2++;
+}
+
 
     void battleScreen(int id) {
         background(0);
