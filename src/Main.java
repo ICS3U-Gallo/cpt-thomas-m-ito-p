@@ -4,10 +4,8 @@ import java.util.*;
 public class Main extends PApplet {
 
     public static Scanner in = new Scanner(System.in);
-    public static Random rng = new Random();//random number generator
-        //to set rng range: rng.nextInt((max - min) + 1) + min;
     public static GameCharacter hero = new GameCharacter("Lincoln", 1, 20, 20, 5, 3, 4);
-    ArrayList<GameCharacter> enemies  = new ArrayList<GameCharacter>();
+    ArrayList<GameCharacter> enemies  = new ArrayList<>();
     ArrayList<PImage> enemyPics = new ArrayList<PImage>();
 
     int enemyId;
@@ -54,7 +52,7 @@ public class Main extends PApplet {
     }
 
     public void draw() {
-
+        imageMode(CORNER); //draw image from corner when not otherwise specified
         if (screenState == 0){
             menuScreen();
         }else if (screenState == 1){
@@ -62,7 +60,6 @@ public class Main extends PApplet {
         }else if (screenState == 2){
             dialogueScreen();
         }else if (screenState == 3) {
-            createEnemies();
             battleScreen(enemyId);
         }
     }
@@ -71,8 +68,12 @@ public class Main extends PApplet {
         enemies.add(new GameCharacter("Gavin", 1,  20, 20, 5, 3, 2));
         enemies.add(new GameCharacter("Tree", 1, 15, 15, 4, 1, 0));
 
+        //create enemy images
         enemyPics.add(loadImage("Assets/gavin.png"));
         enemyPics.add(loadImage("Assets/tree.png"));
+
+        //resize enemy images
+
     }
 
     void resetCharacters(int id) {
@@ -94,8 +95,8 @@ public class Main extends PApplet {
 
     int encounterValue(){
         //use two random nubers and find the average to reduce encounter chance
-        int firstNum = rng.nextInt(100 - 0) + 1;
-        int secondNum = rng.nextInt(100 - 0) + 1;
+        int firstNum = (int)random(0, 100);
+        int secondNum = (int)random(0, 100);
 
         return (firstNum + secondNum) / 2;
 
@@ -113,7 +114,7 @@ public class Main extends PApplet {
                 sansLoc.x += moveSpeed;
             }
             if(encounterValue() <= 10) {
-                enemyId = rng.nextInt(enemies.size() - 1) + 1;
+                enemyId = (int)random(0, enemies.size());
                 screenState = 3;
             }
         }
@@ -260,11 +261,6 @@ public class Main extends PApplet {
             enemyId = 0;
             screenState = 3;
         }
-        //int m = millis();
-        //if(m <
-        //fill(m % 255);
-        //rect(25, 25, 50, 50);
-
         //characters
         image(gavin, width - 250, height/2, height/3, height/3);
         image(sans, 0, height/2 + 40, height/3 - 50, height/3 -50);
@@ -274,11 +270,8 @@ public class Main extends PApplet {
         background(0);
         fill(255);
         int damageDealt;
-        int actionValue;
-
-        //text("You Encountered: " + enemies.get(id).getName(), width/2, height/2);
-
-
+        imageMode(CENTER);//draw images from center
+        image(enemyPics.get(id), width/2, height/2, 400, 400);
 
         if(enemies.get(id).getCurrentHP() > 0) {
             textSize(25);
@@ -286,14 +279,20 @@ public class Main extends PApplet {
             text("Your HP: " + hero.getCurrentHP() + "\n1. Attack 2. Run", 50, 50);
             textAlign(RIGHT);
             text(enemies.get(id).getName() + "'s HP: " + enemies.get(id).getCurrentHP(), width - 50, 50);
-            if (keyPressed && key == '1') {
+            if (key == '1') {
                 //your attack
                 damageDealt = hero.getAttack() - enemies.get(id).getDefence();
+                if (damageDealt < 0){
+                    damageDealt = 0;
+                }
                 enemies.get(id).setCurrentHP(enemies.get(id).getCurrentHP() - damageDealt);
                 //enemy attack
                 damageDealt = enemies.get(id).getAttack() - hero.getDefence();
+                if (damageDealt < 0){
+                    damageDealt = 0;
+                }
                 hero.setCurrentHP(hero.getCurrentHP() - damageDealt);
-            } else if (keyPressed && key == '2') {
+            } else if (key == '2') {
                 resetCharacters(id);
                 screenState = 1;
             } else {
@@ -310,7 +309,7 @@ public class Main extends PApplet {
     }
 
     void levelUp(int min, int max) {
-        int statPoints = rng.nextInt((max - min) + 1) + min; // set range for how many stats can level up
+        int statPoints = (int)random(min, max); // set range for how many stats can level up
         int leveledStat; //use numbers to id stats
 
         while (statPoints > 0) {

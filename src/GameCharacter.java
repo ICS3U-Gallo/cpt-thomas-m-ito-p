@@ -3,7 +3,6 @@
 class GameCharacter {
 
     private String name;
-    private String job;
     private int level;
     private int maxHP;
     private int currentHP;
