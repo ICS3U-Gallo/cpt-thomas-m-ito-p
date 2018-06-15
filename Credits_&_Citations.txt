@@ -1,2 +1,8 @@
-Skeletons (originally named sans & papyrus)
-Toby Fox
+Skeletons (originally named sans & papyrus of Undertale)
+Created by Toby Fox
+(sans.png) http://www.stickpng.com/img/games/undertale/undertale-sans
+(papyrus.png) http://omniversal-battlefield.wikia.com/wiki/File:Papyrus.png
+
+Tree
+Created by René Alejandro Hernández
+(tree.png) https://design.tutsplus.com/tutorials/how-to-create-an-isometric-pixel-art-tree-in-adobe-photoshop--cms-23606
