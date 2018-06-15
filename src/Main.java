@@ -65,7 +65,11 @@ public class Main extends PApplet {
             dialogueScreen();
         } else if (screenState == 3) {
             battleScreen(enemyId);
-        }
+        } else if(screenState == 4){
+            winScreen();
+        } else if(screenState == 5){
+            loseScreen();
+  }
     }
 
     void createEnemies() {
@@ -206,7 +210,7 @@ public class Main extends PApplet {
         text("Introduce yourself to the", 10, 65);
         text("mayor, Gavin.", 10, 95);
         text("Beware of hidden enemies", 10, 125);
-        text("on the way", 10, 155);
+        text("on the way.", 10, 155);
 
         if (sansLoc.x >= width - 225) {
             sansLoc.x = width - 225;
@@ -315,6 +319,40 @@ public class Main extends PApplet {
   textVar2++;
 }
 
+   void winScreen() { 
+      background(0);
+        fill(sansLoc.x/4, sansLoc.y/4, sansLoc.x/4);
+        textSize(300);
+        textAlign(CENTER);
+        text("WINNER!", width / 2, height / 2 + 25);
+        fill(255);
+        textSize(30);
+        text("YOU HAVE SECURED THE MAGICAL RED OAK TREE!", width/2, height/2 + 100);
+        text("press [e] to play again", width / 2, height / 2 + 150);
+        image(sans, sansLoc.x, sansLoc.y, 75, 75);
+        if (key == 'e') {
+           screenState = 0;
+           textVar1 = 0;
+           textVar2 = 0;
+        }
+   }       
+        void loseScreen() { 
+      background(0);
+        fill(sansLoc.x/4, sansLoc.y/4, sansLoc.x/4);
+        textSize(300);
+        textAlign(CENTER);
+        text("LOSER!", width / 2, height / 2 + 25);
+        fill(255);
+        textSize(30);
+        text("YOU FAILED TO OBTAIN THE MAGICAL RED OAK TREE!", width/2, height/2 + 100);
+        text("press [e] to try again", width / 2, height / 2 + 150);
+        image(sans, sansLoc.x, sansLoc.y, 75, 75);
+        if (key == 'e') {
+           screenState = 0;
+           textVar1 = 0;
+           textVar2 = 0;
+        }      
+        }
 
     void battleScreen(int id) {
         background(0);
@@ -369,7 +407,7 @@ public class Main extends PApplet {
         if (enemies.get(id).getCurrentHP() <= 0) { //if you win the battle
             hero.setKillCount(hero.getKillCount() + 1); //add to the kill counter
             resetCharacters(id);
-            screenState = 1;
+            screenState = 4;
         }
     }
     public void keyReleased() {
