@@ -10,13 +10,12 @@ public class Main extends PApplet {
 
     int enemyId;
     int moveSpeed = 7;
-    PVector sansLoc;
+    PVector lincolnLoc;
     PImage gavin;
-    PImage sans;
+    PImage lincoln;
     PImage tree;
     int textVar1 = 0;
     int textVar2 = 0;
-
 
     int screenState;
     PGraphics grove;
@@ -34,10 +33,11 @@ public class Main extends PApplet {
     public void setup() {
         background(0);
         gavin = loadImage("Assets/gavin.png");
-        sans = loadImage("Assets/sans.png");
+        lincoln = loadImage("Assets/lincoln.png");
         tree = loadImage("Assets/tree.png");
         screenState = 0;//title screen
-        sansLoc = new PVector(width - 300, height - 200);
+        //lincolnLoc = new PVector(width - 300, height - 200);
+        lincolnLoc = new PVector(100, height/2);
         potionCount = 3;
         createEnemies();
 
@@ -69,27 +69,26 @@ public class Main extends PApplet {
             winScreen();
         } else if(screenState == 5){
             loseScreen();
-  }
+        }
     }
 
     void createEnemies() {
-        enemies.add(new GameCharacter("Gavin", 1, 20, 20, 5, 3, 2));
-        enemies.add(new GameCharacter("Tree", 1, 15, 15, 4, 1, 0));
+        enemies.add(new GameCharacter("Gavin", 1, 20, 20, 12, 3, 2));
+        enemies.add(new GameCharacter("Tree", 1, 15, 15, 10, 1, 0));
 
         //create enemy images
         enemyPics.add(loadImage("Assets/gavin.png"));
         enemyPics.add(loadImage("Assets/tree.png"));
-
-        //resize enemy images
 
     }
 
     void resetCharacters(int id) {
         enemies.get(id).setCurrentHP(enemies.get(id).getMaxHP());
         hero.setCurrentHP(hero.getMaxHP());
+        potionCount = 3;
     }
 
-    boolean wasdPressed() {
+    boolean wasdPressed() { // used to check for encounters ONLY when moving
         if (screenState == 1 && keyPressed) {
             if (key == 'w' || key == 'W'
                     || key == 's' || key == 'S'
@@ -103,23 +102,23 @@ public class Main extends PApplet {
 
     int encounterValue() {
         //use two random nubers and find the average to reduce encounter chance
+        //also i wanted to mess with random numbers
         int firstNum = (int) random(0, 100);
         int secondNum = (int) random(0, 100);
 
         return (firstNum + secondNum) / 2;
-
     }
 
     public void keyPressed() {
         if (screenState == 1 && wasdPressed()) {
             if (key == 'w' || key == 'W') {
-                sansLoc.y -= moveSpeed;
+                lincolnLoc.y -= moveSpeed;
             } else if (key == 's' || key == 'S') {
-                sansLoc.y += moveSpeed;
+                lincolnLoc.y += moveSpeed;
             } else if (key == 'a' || key == 'A') {
-                sansLoc.x -= moveSpeed;
+                lincolnLoc.x -= moveSpeed;
             } else if (key == 'd' || key == 'D') {
-                sansLoc.x += moveSpeed;
+                lincolnLoc.x += moveSpeed;
             }
             if (encounterValue() <= 10) {
                 enemyId = (int) random(1, enemies.size());
@@ -128,6 +127,9 @@ public class Main extends PApplet {
         }
     }
 
+    public void keyReleased() {
+        loop();//loop after releasing a key for battle
+    }
 
     void menuScreen() {
         background(111, 227, 0);
@@ -135,9 +137,9 @@ public class Main extends PApplet {
         fill(255, 241, 195);
         rect(100, 200, width - 200, height, 50);
 
-        int numTreesV1 = 25;
+        int numLeftTrees = 25;
 
-        for (int i = 0; i < numTreesV1; i++) {
+        for (int i = 0; i < numLeftTrees; i++) {
             float x = -110;
             float y = -135 + 340 * i;
             image(tree, x, y, 400, 400);
@@ -151,9 +153,9 @@ public class Main extends PApplet {
             image(tree, x, y, 400, 400);
         }
 
-        int numTreesV2 = 25;
+        int numRightTrees = 25;
 
-        for (int i = 0; i < numTreesV2; i++) {
+        for (int i = 0; i < numRightTrees; i++) {
             float x = width - 230;
             float y = -135 + 340 * i;
             image(tree, x, y, 400, 400);
@@ -164,7 +166,7 @@ public class Main extends PApplet {
         textAlign(CENTER);
         text("Gavin And Lincoln's Tree Adventure", width / 2, height / 2 + 25);
         textSize(30);
-        text("press [SPACE] to start", width / 2, height / 2 + 150);
+        text("Press [SPACE] to start \nUse WASD keys to move", width / 2, height / 2 + 150);
         if (key == ' ') {
             screenState = 1;
         }
@@ -173,8 +175,8 @@ public class Main extends PApplet {
     void mapScreen() {
         background(255, 241, 195); //#fff1c3 sand
         textAlign(LEFT);
-        //path
 
+        //path
         stroke(232, 185, 39);//#e8b927
         strokeWeight(10);
         fill(237, 200, 85);//#edc855
@@ -190,7 +192,7 @@ public class Main extends PApplet {
 
         image(gavin, width - 150, height / 2, 100, 100);
 
-        image(sans, sansLoc.x, sansLoc.y, 75, 75);
+        image(lincoln, lincolnLoc.x, lincolnLoc.y, 75, 75);
 
         //water
 
@@ -212,29 +214,29 @@ public class Main extends PApplet {
         text("Beware of hidden enemies", 10, 125);
         text("on the way.", 10, 155);
 
-        if (sansLoc.x >= width - 225) {
-            sansLoc.x = width - 225;
+        if (lincolnLoc.x >= width - 225) {
+            lincolnLoc.x = width - 225;
             fill(0);
             rect(5, 5, 375, 195, 15);
             fill(255);
             textSize(25);
             text("keep off the grass!", 10, 30);
         }
-        if (sansLoc.x <= 0) {
-            sansLoc.x = 0;
+        if (lincolnLoc.x <= 0) {
+            lincolnLoc.x = 0;
         }
-        if (sansLoc.y >= height - 175) {
-            sansLoc.y = height - 175;
+        if (lincolnLoc.y >= height - 175) {
+            lincolnLoc.y = height - 175;
             fill(0);
             rect(5, 5, 375, 195, 15);
             textSize(25);
             fill(255);
             text("stay out of the water!", 10, 30);
         }
-        if (sansLoc.y <= 0) {
-            sansLoc.y = 0;
+        if (lincolnLoc.y <= 0) {
+            lincolnLoc.y = 0;
         }
-        if (sansLoc.x <= width - 225 && sansLoc.x >= width - 260 && sansLoc.y <= height / 2 + 75 && sansLoc.y >= height / 2 - 75) {
+        if (lincolnLoc.x <= width - 225 && lincolnLoc.x >= width - 260 && lincolnLoc.y <= height / 2 + 75 && lincolnLoc.y >= height / 2 - 75) {
             fill(0);
             rect(5, 5, 375, 195, 15);
             textSize(25);
@@ -309,36 +311,35 @@ public class Main extends PApplet {
             }
         }
         //characters
-  image(papyrus, width - 250, height/2, height/3, height/3); 
-  image(sans, 0, height/2 + 40, height/3 - 50, height/3 -50);
+  image(gavin, width - 250, height/2, height/3, height/3);
+  image(lincoln, 0, height/2 + 40, height/3 - 50, height/3 -50);
 }
+
+    public void mousePressed() {
+      textVar1++;
+      textVar2++;
     }
 
- void mousePressed() {
-  textVar1++;
-  textVar2++;
-}
-
-   void winScreen() { 
+    void winScreen() {
       background(0);
-        fill(sansLoc.x/4, sansLoc.y/4, sansLoc.x/4);
+        fill(lincolnLoc.x/4, lincolnLoc.y/4, lincolnLoc.x/4);
         textSize(300);
         textAlign(CENTER);
         text("WINNER!", width / 2, height / 2 + 25);
         fill(255);
         textSize(30);
         text("YOU HAVE SECURED THE MAGICAL RED OAK TREE!", width/2, height/2 + 100);
-        text("press [e] to play again", width / 2, height / 2 + 150);
-        image(sans, sansLoc.x, sansLoc.y, 75, 75);
+        text("You vanquished: " + hero.getKillCount() + "enemies.", width/2, height/2 + 150);
+        text("press [e] to play again", width / 2, height / 2 + 200);
+        image(lincoln, lincolnLoc.x, lincolnLoc.y, 75, 75);
         if (key == 'e') {
-           screenState = 0;
-           textVar1 = 0;
-           textVar2 = 0;
+           resetGame();
         }
-   }       
-        void loseScreen() { 
-      background(0);
-        fill(sansLoc.x/4, sansLoc.y/4, sansLoc.x/4);
+   }
+
+    void loseScreen() {
+        background(0);
+        fill(lincolnLoc.x/4, lincolnLoc.y/4, lincolnLoc.x/4);
         textSize(300);
         textAlign(CENTER);
         text("LOSER!", width / 2, height / 2 + 25);
@@ -346,13 +347,11 @@ public class Main extends PApplet {
         textSize(30);
         text("YOU FAILED TO OBTAIN THE MAGICAL RED OAK TREE!", width/2, height/2 + 100);
         text("press [e] to try again", width / 2, height / 2 + 150);
-        image(sans, sansLoc.x, sansLoc.y, 75, 75);
+        image(lincoln, lincolnLoc.x, lincolnLoc.y, 75, 75);
         if (key == 'e') {
-           screenState = 0;
-           textVar1 = 0;
-           textVar2 = 0;
-        }      
+            resetGame();
         }
+    }
 
     void battleScreen(int id) {
         background(0);
@@ -371,7 +370,7 @@ public class Main extends PApplet {
         }
 
         noLoop();
-        if (enemies.get(id).getCurrentHP() > 0) {
+        if (enemies.get(id).getCurrentHP() > 0 && hero.getCurrentHP() > 0) {
             textSize(25);
             textAlign(LEFT);
             text("Your HP: " + hero.getCurrentHP() + "\nPotions Remaining: " + potionCount, 50, 50);
@@ -398,20 +397,29 @@ public class Main extends PApplet {
                 screenState = 1;
                 //enemy attack
                 damageDealt = enemies.get(id).getAttack() - hero.getDefence();
-                if (damageDealt < 0) {
-                    damageDealt = 0;
-                }
             }
         }
 
         if (enemies.get(id).getCurrentHP() <= 0) { //if you win the battle
             hero.setKillCount(hero.getKillCount() + 1); //add to the kill counter
             resetCharacters(id);
-            screenState = 4;
+            if(id == 0) {
+                screenState = 4; //go to win when you beat the boss
+            }else{
+                screenState = 1; //go back to the map on random encounters
+            }
+        }
+        if (hero.getCurrentHP() <= 0) { //if you lose
+            screenState = 5; //go to lose screen
+            resetCharacters(id);
         }
     }
-    public void keyReleased() {
-        //if (screenState == 3)
-        loop();//loop after releasing a key - for battle
+
+    void resetGame() { //reset any necessary variables
+        lincolnLoc.set(50, height/2);
+        hero.setKillCount(0);
+        screenState = 0;
+        textVar1 = 0;
+        textVar2 = 0;
     }
 }

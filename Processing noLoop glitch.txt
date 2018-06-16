@@ -1,0 +1,3 @@
+for some reason, when using noLoop() in combination with keypresses and releases, the game is one keypress behind.
+
+from what I looked at, this seems like a bug in processing that has to do with when the draw loop is run after running loop().
