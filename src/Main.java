@@ -363,8 +363,11 @@ public class Main extends PApplet {
         image(enemyPics.get(id), width / 2, height / 2, 400, 400);
 
         textAlign(CENTER);
-        text("1. Attack 2. Use Potion 3. Run", width/2, height - 50);
-
+        if(id != 0) {
+            text("1. Attack 2. Use Potion 3. Run", width / 2, height - 50);
+        }else{
+            text("1. Attack 2. Use Potion", width / 2, height - 50);
+        }
         if(hero.getCurrentHP() > hero.getMaxHP()) {
             hero.setCurrentHP(hero.getMaxHP());
         }
@@ -389,14 +392,13 @@ public class Main extends PApplet {
                     damageDealt = 0;
                 }
                 hero.setCurrentHP(hero.getCurrentHP() - damageDealt);
-            }else if(key =='2'&& potionCount > 0) {
+            }else if(key =='2'&& potionCount > 0) { //use potion
                 potionCount -= 1;
                 hero.setCurrentHP(hero.getCurrentHP() + 5);
-            } else if (key == '3') {
+            } else if (key == '3' && id != 0) { //run
                 resetCharacters(id);
                 screenState = 1;
                 //enemy attack
-                damageDealt = enemies.get(id).getAttack() - hero.getDefence();
             }
         }
 

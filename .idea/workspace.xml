@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="77441733-eabf-4c28-b7a7-d36adc4aa4ed" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/Processing noLoop glitch.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/sans.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/lincoln.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Credits_&amp;_Citations.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Credits_&amp;_Citations.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CPT/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CPT/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
@@ -25,11 +22,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="73" selection-start-line="73" selection-end-line="73" />
+            <state relative-caret-position="163">
+              <caret line="381" column="27" selection-start-line="381" selection-start-column="27" selection-end-line="381" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#333#341#0" expanded="true" />
@@ -48,24 +45,6 @@
                 <element signature="method#winScreen#0;class#Main#0" />
                 <element signature="method#loseScreen#0;class#Main#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Processing noLoop glitch.txt" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Processing noLoop glitch.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="34" lean-forward="true" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Credits_&amp;_Citations.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Credits_&amp;_Citations.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -145,8 +124,8 @@
         <option value="$PROJECT_DIR$/src/Character.java" />
         <option value="$PROJECT_DIR$/src/GameCharacter.java" />
         <option value="$PROJECT_DIR$/Credits_&amp;_Citations.txt" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/Processing noLoop glitch.txt" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
       </list>
     </option>
   </component>
@@ -495,7 +474,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528988279700</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="CPT">
+      <created>1529120929007</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1529120929007</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -511,11 +497,11 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5073826" side_tool="true" weight="0.2065527" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.16666667" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49261746" visible="true" weight="0.2065527" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49261746" visible="true" weight="0.2065527" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32763532" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8025135" visible="true" weight="0.21610738" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8025135" visible="true" weight="0.21610738" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49932885" weight="0.32905984" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -985,10 +971,17 @@
     <entry file="file://$PROJECT_DIR$/Processing noLoop glitch">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/Processing noLoop glitch.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="126" selection-start-line="2" selection-start-column="126" selection-end-line="2" selection-end-column="126" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="73" selection-start-line="73" selection-end-line="73" />
+        <state relative-caret-position="163">
+          <caret line="381" column="27" selection-start-line="381" selection-start-column="27" selection-end-line="381" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#333#341#0" expanded="true" />
@@ -1007,13 +1000,6 @@
             <element signature="method#winScreen#0;class#Main#0" />
             <element signature="method#loseScreen#0;class#Main#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Processing noLoop glitch.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="34" lean-forward="true" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
         </state>
       </provider>
     </entry>
