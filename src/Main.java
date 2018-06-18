@@ -75,10 +75,12 @@ public class Main extends PApplet {
     void createEnemies() {
         enemies.add(new GameCharacter("Gavin", 1, 20, 20, 12, 3, 2));
         enemies.add(new GameCharacter("Tree", 1, 15, 15, 10, 1, 0));
+        enemies.add(new GameCharacter("Ghost", 1, 25, 25, 8, 1, 0));
 
         //create enemy images
         enemyPics.add(loadImage("Assets/gavin.png"));
         enemyPics.add(loadImage("Assets/tree.png"));
+        enemyPics.add(loadImage("Assets/Ghost.png"));
 
     }
 
